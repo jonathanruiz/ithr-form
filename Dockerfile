@@ -5,7 +5,7 @@ FROM node:12
 WORKDIR /usr/src/app
 
 # Copy files to the root of the container
-COPY package.json ./
+COPY package*.json ./
 
 # Install the dependencies 
 RUN npm install
