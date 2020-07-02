@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Copy files to the root of the container
 COPY package*.json ./
 
-# Install the dependencies 
+# Install the dependencies for the server 
 RUN npm install
 
 # Copy the rest of the files too
@@ -16,5 +16,11 @@ COPY . .
 # Connect to the container with that port
 EXPOSE 5000
 
-# Run the scripts in the package file
-CMD ["npm", "start"]
+# Install the dependencies for React client
+RUN npm run client-install
+
+# Run the React build
+RUN cd client && npm run build
+
+# Run the dev script to run server and client
+CMD ["npm", "run", "start"]
