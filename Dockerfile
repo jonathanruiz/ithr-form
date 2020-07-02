@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Connect to the container with that port
-EXPOSE 3000
+EXPOSE 5000
 
 # Run the scripts in the package file
 CMD ["npm", "start"]
