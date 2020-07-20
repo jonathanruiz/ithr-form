@@ -1,3 +1,4 @@
+// Imports
 const express = require("express");
 const helmet = require("helmet");
 const mongoose = require("mongoose");
@@ -11,34 +12,45 @@ app.use(express.static(path.join(__dirname, "client/build")));
 // Middleware for security using HTTP headers
 app.use(helmet());
 
-// Connect to MongoDB
-// mongoose
-//   .connect("mongodb://mongo:27017/docker-node-mongo", { useNewUrlParser: true })
-//   .then(() => console.log("MongoDB Connected"))
-//   .catch((err) => console.log(err));
-
 // If in production, execute the production build
 if (app.get("env") === "production") {
+  // Connect to MongoDB on container
+  mongoose
+    .connect("mongodb://mongo:27017/docker-node-mongo", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB Connected"))
+    .catch((err) => console.log(err));
+
   // Render the React build file
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 }
-
 // If in development, exectute the production build
-if (app.get("env") === "development") {
-  // Send that this is a dev page
-  app.get("/", (req, res) => {
-    res.send("This is the development page");
+else {
+  // Connect to local MongoDB
+  mongoose
+    .connect("mongodb://localhost:27017/docker-node-mongo", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log("MongoDB Connected"))
+    .catch((err) => console.log(err));
+
+  // Send a test
+  app.get("/api/test", (req, res) => {
+    console.log("You are in the homepage!");
   });
 }
 
 // Test API
 app.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
+  console.log("I got it!");
 });
 
 // Show the env
-console.log(app.get("env"));
+console.log(`You are running in ${app.get("env")}`);
 
 app.listen(port, () => console.log(`App at http://localhost:${port}`));

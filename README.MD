@@ -57,7 +57,31 @@ root
 │       Item.js
 ```
 
-## Deployment
+## Development
+
+To run a development build, run a local MongoDB instance on your computer or through Docker. Once that is running, you can run the following commands at the root folder.
+
+Run this command to install the server dependencies.
+
+```
+npm install
+```
+
+Run this command to install the client dependencies
+
+```
+npm run client-install
+```
+
+Run this command to have your servers up and running:
+
+```
+npm run dev-start
+```
+
+Your development server will now be running [localhost:3000](http://localhost:3000).
+
+## Production
 
 To deploy the container, open up your terminal and find get to the root folder of the app and run the following command:
 
@@ -67,4 +91,4 @@ docker-compose up -d
 
 Docker will then look for the `Dockerfile` found in the root folder and will download the images and run the container into production mode and run `npm` scripts to make sure it compiles a production ready version of the app. For further details on it is deployed, look at the `Dockerfile` comments.
 
-Once deployed, go to [localhost](http://localhost) to access the application
+Once deployed, go to [localhost](http://localhost) to access the application.

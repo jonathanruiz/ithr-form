@@ -16,8 +16,8 @@ COPY . .
 # Connect to the container with that port
 EXPOSE 5000
 
-# Set to production
-RUN export NODE_ENV=production
+# Set to enviromental variable to production
+ENV NODE_ENV=production
 
 # Install the dependencies for React client
 RUN npm run client-install
