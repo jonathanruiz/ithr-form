@@ -1,21 +1,22 @@
 {
-  "name": "hirt-form",
+  "name": "ithr-form",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app will create UI where IT and HR can work together to on-board new employees.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
+    "server-start": "nodemon index.js",
     "client-install": "cd client && npm install",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
-    "docker-build": "concurrently \"npm run start \" \"cd client && npm run build\""
+    "client-start": "npm start --prefix client",
+    "dev-start": "concurrently \"npm run server-start\" \"npm run client-start\"",
+    "prod-start": "npm run server-start"
   },
-  "author": "",
+  "author": "Jonathan Ruiz",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
+    "helmet": "^3.23.3",
     "mongoose": "^5.9.14",
     "nodemon": "^2.0.4"
   }

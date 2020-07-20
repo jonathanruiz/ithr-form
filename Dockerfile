@@ -16,6 +16,9 @@ COPY . .
 # Connect to the container with that port
 EXPOSE 5000
 
+# Set to production
+RUN export NODE_ENV=production
+
 # Install the dependencies for React client
 RUN npm run client-install
 
@@ -23,4 +26,4 @@ RUN npm run client-install
 RUN cd client && npm run build
 
 # Run the dev script to run server and client
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "prod-start"]
