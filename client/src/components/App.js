@@ -1,17 +1,15 @@
 // Components
 import React from "react";
-import LoginForm from "./LoginForm";
-import MainHeader from "./MainHeader";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import Template from "../template/Template";
+import LoginPage from "../pages/LoginPage";
+import SignupPage from "../pages/SignupPage";
+import Dashboard from "../pages/DashboardPage";
 
-// Bootstrap
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Alert from "react-bootstrap/Alert";
 
 // Styled Components
-import styled, { createGlobalStyle } from "styled-components";
-
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -29,31 +27,27 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 
-const MainApp = styled.div`
-  .App {
-    text-align: center;
-  }
-`;
-
 const App = () => {
   return (
-    <MainApp className="App">
-      <Container fluid="md">
-        <Row>
-          <Col>
-            <MainHeader></MainHeader>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={3} />
-          <Col xs={6}>
-            <LoginForm></LoginForm>
-          </Col>
-          <Col xs={3} />
-        </Row>
-      </Container>
-      <GlobalStyle></GlobalStyle>
-    </MainApp>
+    <Router>
+      <Switch>
+        <Route path="/submitted">
+          <Template
+            page={<Alert variant="primary">This is a primary alert.</Alert>}
+          />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+        <Route path="/signup">
+          <Template page={<SignupPage />} />
+        </Route>
+        <Route path="/">
+          <Template page={<LoginPage />} />
+        </Route>
+      </Switch>
+      <GlobalStyle />
+    </Router>
   );
 };
 
